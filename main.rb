@@ -1,7 +1,10 @@
 require 'telegram/bot'
-
+load 'twtter_wrapper.rb'
 token = '501516696:AAEh8OJQ1xhTJ22dcWVK5zPjklvh1wXtt5U'
 
+puts "hi\n"
+wrapper = TWrapper.new()
+wrapper.getAlerts()
 Telegram::Bot::Client.run(token) do |bot|
     bot.listen do |message|
         case message.text
