@@ -4,9 +4,11 @@ class Alert
         @planet = planet
         @credits = credits
         @reward = reward
-        @time = time
+        @r_time = time
         @tweet = text
     end
+
+    attr_reader :mission, :planet, :credits, :reward, :r_time, :text
 
     def filter(text)
         /text/.match(@tweet)

@@ -14,9 +14,9 @@ class TWrapper
 
     def getAlerts()
         puts "getAlerts"
-            @client.user_timeline("WarframeAlerts", {count: 30}).each do |tweet|
-                parser(tweet.text)
-            end
+        @client.user_timeline("WarframeAlerts", {count: 30}).each do |tweet|
+            @alerts = parser(tweet.text)
+        end
     end
 
     def parser(tweet)
@@ -40,6 +40,7 @@ class TWrapper
         puts "Credtis: " + credits.to_s
         puts "Credtis: " + credits.to_s
         puts "Reward: " + (if reward == nil then "NONE" else reward end)
+        Alert new mission.to_s, planet.to_s, credits.to_s, reward.to_s, 1, "a"
     end
 
     def parseInvasion(tweet)
