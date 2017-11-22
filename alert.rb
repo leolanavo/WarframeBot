@@ -9,7 +9,7 @@ class Alert
 end
 
 class Invasion
-    def initialize(mission, planet, f_faction, s_faction, f_reward, s_faction)
+    def initialize(mission, planet, f_faction, s_faction, f_reward, s_reward)
         @mission = mission
         @planet = planet
         @f_faction = f_faction
