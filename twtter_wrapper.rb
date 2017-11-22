@@ -14,9 +14,9 @@ class TWrapper
 
     def getAlerts()
         puts "getAlerts"
-        @client.user_timeline("WarframeAlerts", {count: 30}).each do |tweet|
-            parser(tweet.text)
-        end
+            @client.user_timeline("WarframeAlerts", {count: 30}).each do |tweet|
+                parser(tweet.text)
+            end
     end
 
     def parser(tweet)
@@ -31,7 +31,7 @@ class TWrapper
     end
 
     def parseAlert(tweet)
-        mission, planet, time, credits, reward = 
+        mission, planet, time, credits, reward =
             tweet.match(/(.*) \((.*)\): .* - ([0-9]*)m - ([0-9]*)cr(?: - (.*))?/i).captures
 
         puts "Misson: " + mission.to_s
@@ -43,8 +43,8 @@ class TWrapper
     end
 
     def parseInvasion(tweet)
-        mission, planet, f_faction, f_reward, s_faction, s_reward = 
-            tweet.match(/(.*) \((.*)\) .*: (.*) (?: \((.*)\))? VS. (.*) \((.*)\)/i).captures
+        mission, planet, f_faction, f_reward, s_faction, s_reward =
+            tweet.match(/(.*) \((.*)\) Invasion: (.*) (?: \((.*)\))?VS. (.*) \((.*)\)/i).captures
 
         puts "Misson: " + mission.to_s
         puts "Planet: " + planet.to_s
@@ -59,14 +59,14 @@ class TWrapper
         second = [0, 0]
         third = [0, 0]
 
-        enemy, first[0], first[1], second[0], second[1], third[0], third[1] = 
+        enemy, first[0], first[1], second[0], second[1], third[0], third[1] =
             tweet.match(/.* vs\. (.*): \[1\] (.*) - (.*) \[2\] (.*) - (.*) \[3\] (.*) - (.*)/i).captures
-        
+
         puts "Enemy: " + enemy.to_s
         puts "First Mission: " + first[0].to_s + "Modifier: " + first[1].to_s
         puts "Second Mission: " + second[0].to_s + "Modifier: " + second[1].to_s
         puts "Third Mission: " + third[0].to_s + "Modifier: " + third[1].to_s
 
     end
-
 end
+
