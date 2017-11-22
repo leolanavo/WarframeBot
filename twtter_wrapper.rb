@@ -20,9 +20,7 @@ class TWrapper
     end
 
     def parser(tweet)
-        puts "parsing: " + tweet
-        tweet = tweet.split(":")
-        head = tweet[0].split(" ")
+        head = tweet.split(":")[0].split(" ")
         if head[0] == "Sortie" then
             parseSortie(tweet)
         elsif head[-1] == "Invasion" then
@@ -33,27 +31,42 @@ class TWrapper
     end
 
     def parseAlert(tweet)
-        mission, planet = tweet[0].match(/(.*) \((.*)\)/i).captures
-        time, credits, reward = tweet[1].match(/.* - ([0-9]*)m - ([0-9]*)cr(?: - (.*))?/i).captures
+        mission, planet, time, credits, reward = 
+            tweet.match(/(.*) \((.*)\): .* - ([0-9]*)m - ([0-9]*)cr(?: - (.*))?/i).captures
 
-        puts mission + ', ' + planet
-        puts time + ', ' + credits + (if reward == nil then '' else ', ' + reward end)
+        puts "Misson: " + mission.to_s
+        puts "Planet: " + planet.to_s
+        puts "Time: " + time.to_s
+        puts "Credtis: " + credits.to_s
+        puts "Credtis: " + credits.to_s
+        puts "Reward: " + (if reward == nil then "NONE" else reward end)
+    end
+
+    def parseInvasion(tweet)
+        mission, planet, f_faction, f_reward, s_faction, s_reward = 
+            tweet.match(/(.*) \((.*)\) .*: (.*) (?: \((.*)\))? VS. (.*) \((.*)\)/i).captures
+
+        puts "Misson: " + mission.to_s
+        puts "Planet: " + planet.to_s
+        puts "First Faction: " + f_faction.to_s
+        puts "Reward: " + (if f_reward == nil then "NONE" else f_reward end)
+        puts "Second Faction: " + s_faction.to_s
+        puts "Second Reward: " + s_reward.to_s
     end
 
     def parseSortie(tweet)
-        enemy = tweet[0].match(/.* vs\. (.*)/i).captures[0]
         first = [0, 0]
         second = [0, 0]
         third = [0, 0]
 
-        first[0], first[1], second[0], second[1], third[0], third[1] = 
-            tweet[1].match(/ \[1\] (.*) - (.*) \[2\] (.*) - (.*) \[3\] (.*) - (.*)/i).captures
-        puts "enemy: " + enemy 
-        puts "first: " + first.to_s
-        puts "second: " + second.to_s
-        puts "third: " + third.to_s
+        enemy, first[0], first[1], second[0], second[1], third[0], third[1] = 
+            tweet.match(/.* vs\. (.*): \[1\] (.*) - (.*) \[2\] (.*) - (.*) \[3\] (.*) - (.*)/i).captures
+        
+        puts "Enemy: " + enemy.to_s
+        puts "First Mission: " + first[0].to_s + "Modifier: " + first[1].to_s
+        puts "Second Mission: " + second[0].to_s + "Modifier: " + second[1].to_s
+        puts "Third Mission: " + third[0].to_s + "Modifier: " + third[1].to_s
+
     end
 
-    def parseInvasion(tweet)
-    end
 end
