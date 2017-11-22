@@ -19,8 +19,12 @@ class TWrapper
         end
     end
 
+    def getElapsedTime(tweet)
+        (Time.new.utc - tweet.created_at).to_i/60
+    end
+
     def parser(tweet)
-        head = tweet.split(":")[0].split(" ")
+        head = tweet.text.split(":")[0].split(" ")
         if head[0] == "Sortie" then
             parseSortie(tweet)
         elsif head[-1] == "Invasion" then
@@ -34,9 +38,13 @@ class TWrapper
         mission, planet, time, credits, reward =
             tweet.match(/(.*) \((.*)\): .* - ([0-9]*)m - ([0-9]*)cr(?: - (.*))?/i).captures
 
+        time = time.to_i - getElapsedTime(tweet)
+        return if time < 0
+
+
         puts "Misson: " + mission.to_s
         puts "Planet: " + planet.to_s
-        puts "Time: " + time.to_s
+        puts "Remaing Time: " + time.to_s
         puts "Credtis: " + credits.to_s
         puts "Credtis: " + credits.to_s
         puts "Reward: " + (if reward == nil then "NONE" else reward end)
@@ -53,6 +61,7 @@ class TWrapper
         puts "Reward: " + (if f_reward == nil then "NONE" else f_reward end)
         puts "Second Faction: " + s_faction.to_s
         puts "Second Reward: " + s_reward.to_s
+        puts
     end
 
     def parseSortie(tweet)
@@ -67,7 +76,7 @@ class TWrapper
         puts "First Mission: " + first[0].to_s + "Modifier: " + first[1].to_s
         puts "Second Mission: " + second[0].to_s + "Modifier: " + second[1].to_s
         puts "Third Mission: " + third[0].to_s + "Modifier: " + third[1].to_s
-
+        puts
     end
 end
 

@@ -1,0 +1,8 @@
+Nome na API ---> Nome Normal
+
+
+VoidTearDrop ---> Void Traces
+Alertium ---> Nitain Extract
+AlertFusionBundleSmall ---> 80 ENDO
+AlertFusionBundleMedium ---> 100 ENDO
+AlertFusionBundleBig ---> 150 ENDO
