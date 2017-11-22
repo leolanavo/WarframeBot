@@ -1,5 +1,6 @@
 require 'twitter'
 load 'alert.rb'
+load 'interactions.rb'
 
 class TWrapper
     def initialize()
@@ -15,7 +16,7 @@ class TWrapper
     def getAlerts()
         puts "getAlerts"
         @client.user_timeline("WarframeAlerts", {count: 30}).each do |tweet|
-            @alerts = parser(tweet.text)
+            @alerts.insert(parse(tweet))
         end
     end
 
@@ -23,7 +24,7 @@ class TWrapper
         (Time.new.utc - tweet.created_at).to_i/60
     end
 
-    def parser(tweet)
+    def parse(tweet)
         head = tweet.text.split(":")[0].split(" ")
         if head[0] == "Sortie" then
             parseSortie(tweet)
@@ -36,32 +37,22 @@ class TWrapper
 
     def parseAlert(tweet)
         mission, planet, time, credits, reward =
-            tweet.match(/(.*) \((.*)\): .* - ([0-9]*)m - ([0-9]*)cr(?: - (.*))?/i).captures
+            tweet.text.match(/(.*) \((.*)\): .* - ([0-9]*)m - ([0-9]*)cr(?: - (.*))?/i).captures
 
         time = time.to_i - getElapsedTime(tweet)
         return if time < 0
 
-
-        puts "Misson: " + mission.to_s
-        puts "Planet: " + planet.to_s
-        puts "Remaing Time: " + time.to_s
-        puts "Credtis: " + credits.to_s
-        puts "Credtis: " + credits.to_s
-        puts "Reward: " + (if reward == nil then "NONE" else reward end)
-        Alert new mission.to_s, planet.to_s, credits.to_s, reward.to_s, 1, "a"
+        newAlert = Alert.new(mission.to_s, planet.to_s, credits.to_s, reward.to_s, time, tweet.text)
+        puts newAlert.to_s
+        return newAlert
     end
 
     def parseInvasion(tweet)
         mission, planet, f_faction, f_reward, s_faction, s_reward =
-            tweet.match(/(.*) \((.*)\) Invasion: (.*) (?: \((.*)\))?VS. (.*) \((.*)\)/i).captures
-
-        puts "Misson: " + mission.to_s
-        puts "Planet: " + planet.to_s
-        puts "First Faction: " + f_faction.to_s
-        puts "Reward: " + (if f_reward == nil then "NONE" else f_reward end)
-        puts "Second Faction: " + s_faction.to_s
-        puts "Second Reward: " + s_reward.to_s
-        puts
+            tweet.text.match(/(.*) \((.*)\) Invasion: (.*) (?: \((.*)\))?VS. (.*) \((.*)\)/i).captures
+        newInvasion = Invasion.new(mission, planet, f_faction, s_faction, f_reward, s_reward, tweet)
+        puts newInvasion.to_s
+        return newInvasion
     end
 
     def parseSortie(tweet)
@@ -70,7 +61,7 @@ class TWrapper
         third = [0, 0]
 
         enemy, first[0], first[1], second[0], second[1], third[0], third[1] =
-            tweet.match(/.* vs\. (.*): \[1\] (.*) - (.*) \[2\] (.*) - (.*) \[3\] (.*) - (.*)/i).captures
+            tweet.text.match(/.* vs\. (.*): \[1\] (.*) - (.*) \[2\] (.*) - (.*) \[3\] (.*) - (.*)/i).captures
 
         puts "Enemy: " + enemy.to_s
         puts "First Mission: " + first[0].to_s + "Modifier: " + first[1].to_s
