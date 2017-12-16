@@ -13,6 +13,7 @@ class Alert
     def filter(text)
         /text/.match(@tweet)
     end
+
     def to_s()
         "Alert\n" +
             "Mission: "   + @mission.to_s + "\n" +
@@ -37,6 +38,7 @@ class Invasion
     def filter(text)
         /text/.match(@tweet)
     end
+
     def to_s()
         "Invasion\n" +
             "Mission: "              + @mission.to_s   + "\n" +

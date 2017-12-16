@@ -2,24 +2,45 @@ require 'telegram/bot'
 
 load 'twitter_wrapper.rb'
 load 'interactions.rb'
+load 'user.rb'
 
 token = '501516696:AAEh8OJQ1xhTJ22dcWVK5zPjklvh1wXtt5U'
 
-wrapper = TWrapper.new()
-wrapper.getAlerts()
+# wrapper = TWrapper.new()
+# wrapper.getAlerts()
+user = User.new
+
 Telegram::Bot::Client.run(token) do |bot|
     bot.listen do |message|
-        case message.text
+        case message.text.split(" ")[0]
+
         when '/start'
-            bot.api.send_message(chat_id: message.chat.id, text: "Hello, #{message.from.first_name}")
+            user.change_id(message.from.id)
+            bot.api.send_message(chat_id: message.chat.id, text: "Hello, #{message.from.first_name}," +
+                                 "please add your filters by typing /add <ITEM>")
+
         when '/stop'
             bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
-        when '/filter'
-            bot.api.send_message(chat_id: message.chat.id, text: "Filter, #{message.from.fist_name}")
+
+        when '/add'
+            filter = message.text.split(" ")[1]
+            user.add_filter(filter)
+            bot.api.send_message(chat_id: message.chat.id, text: "#{filter} added to the list")
+
+        when '/remove'
+            filter = message.text.split(" ")[1]
+            user.remove_filter(filter)
+            bot.api.send_message(chat_id: message.chat.id, text: "#{filter} remove to the list")
+
+        when '/get'
+            bot.api.send_message(chat_id: message.chat.id, text: user.get_filters)
+
         when '/alerts'
             bot.api.send_message(chat_id: message.chat.id, text: "Alerts, #{message.from.fist_name}")
+
         when '/invasions'
             bot.api.send_message(chat_id: message.chat.id, text: "Invasions, #{message.from.fist_name}")
+
         when '/sortie'
             bot.api.send_message(chat_id: message.chat.id, text: "Sortie, #{message.from.fist_name}")
         end
