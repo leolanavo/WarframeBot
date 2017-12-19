@@ -1,5 +1,7 @@
 require 'twitter'
 load 'alert.rb'
+load 'invasion.rb'
+load 'sortie.rb'
 load 'interactions.rb'
 
 class TWrapper
@@ -43,7 +45,6 @@ class TWrapper
                 sortie += parse_sortie(tweet).to_s
             end
         end
-        puts sortie
         sortie
     end
 
