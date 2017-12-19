@@ -1,8 +1,8 @@
 require 'telegram/bot'
 
-load 'twitter_wrapper.rb'
-load 'interactions.rb'
-load 'user.rb'
+load './twitter_wrapper.rb'
+load './interactions.rb'
+load './user.rb'
 
 token = '501516696:AAEh8OJQ1xhTJ22dcWVK5zPjklvh1wXtt5U'
 
