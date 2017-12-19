@@ -33,6 +33,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     multipart-post (2.0.0)
     naught (1.1.0)
+    php-serialize (1.2.0)
     public_suffix (3.0.1)
     simple_oauth (0.3.1)
     telegram-bot-ruby (0.8.5)
@@ -64,9 +65,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  json
-  telegram-bot-ruby
-  twitter
+  json!
+  php-serialize!
+  telegram-bot-ruby!
+  twitter!
+
+RUBY VERSION
+   ruby 2.4.2p198
 
 BUNDLED WITH
    1.16.0
