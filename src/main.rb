@@ -6,8 +6,7 @@ load 'user.rb'
 
 token = '501516696:AAEh8OJQ1xhTJ22dcWVK5zPjklvh1wXtt5U'
 
-# wrapper = TWrapper.new()
-# wrapper.getAlerts()
+wrapper = TWrapper.new()
 user = User.new
 
 Telegram::Bot::Client.run(token) do |bot|
@@ -36,13 +35,13 @@ Telegram::Bot::Client.run(token) do |bot|
             bot.api.send_message(chat_id: message.chat.id, text: user.get_filters)
 
         when '/alerts'
-            bot.api.send_message(chat_id: message.chat.id, text: "Alerts, #{message.from.fist_name}")
+            bot.api.send_message(chat_id: message.chat.id, text: wrapper.get_alerts)
 
         when '/invasions'
-            bot.api.send_message(chat_id: message.chat.id, text: "Invasions, #{message.from.fist_name}")
+            bot.api.send_message(chat_id: message.chat.id, text: wrapper.get_invasions)
 
         when '/sortie'
-            bot.api.send_message(chat_id: message.chat.id, text: "Sortie, #{message.from.fist_name}")
+            bot.api.send_message(chat_id: message.chat.id, text: wrapper.get_sortie)
         end
     end
 end
