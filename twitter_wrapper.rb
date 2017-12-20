@@ -39,7 +39,7 @@ class TWrapper
 
     def get_sortie()
         sortie = "Active sortie\n\n"
-        @client.user_timeline("WarframeAlerts", {count: 30}).each do |tweet|
+        @client.user_timeline("WarframeAlerts", {count: 100}).each do |tweet|
             head = tweet.text.split(":")[0].split(" ")
             if head[0] == "Sortie" then
                 sortie += parse_sortie(tweet).to_s
@@ -77,10 +77,6 @@ class TWrapper
 
         enemy, first[0], first[1], second[0], second[1], third[0], third[1] =
             tweet.text.match(/.* vs\. (.*): \[1\] (.*) - (.*) \[2\] (.*) - (.*) \[3\] (.*) - (.*)/i).captures
-
-        puts first
-        puts second
-        puts third
 
         new_sortie = Sortie.new(enemy, first, second, third, tweet)
         return new_sortie
