@@ -5,6 +5,7 @@ source "https://rubygems.org" do
     gem 'twitter'
     gem 'json'
     gem 'php-serialize'
+    gem 'require'
 end
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
