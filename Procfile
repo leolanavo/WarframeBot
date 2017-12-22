@@ -1,1 +1,1 @@
-worker: bundle exec ruby src/main.rb
+bot: bundle exec ruby src/main.rb
