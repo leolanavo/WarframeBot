@@ -6,6 +6,7 @@ source "https://rubygems.org" do
     gem 'json'
     gem 'php-serialize'
     gem 'require'
+    gem 'sqlite3'
 end
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
