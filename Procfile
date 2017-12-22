@@ -1,1 +1,1 @@
-bot: bundle exec ruby src/main.rb
+web: bundle exec ruby src/main.rb
