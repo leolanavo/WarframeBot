@@ -1,21 +1,25 @@
-RESOURCES = ['Alloy Plate', 'Argon Crystal', 'Circuits', 'Control Module',
-             'Cryotic', 'Ferrite', 'Gallium', 'Morphics', 'Nano Spores',
-             'Neural Sensors', 'Neurodes', 'Orokin Cell', 'Oxium', 'Plastids',
-             'Polymer Bundle', 'Rubedo', 'Salvage', 'Tellurium',
-             'Nitain Extract', 'Synthula']
+R = ['Alloy Plate', 'Argon Crystal', 'Circuits', 'Control Module',
+     'Cryotic', 'Ferrite', 'Gallium', 'Morphics', 'Nano Spores',
+     'Neural Sensors', 'Neurodes', 'Orokin Cell', 'Oxium', 'Plastids',
+     'Polymer Bundle', 'Rubedo', 'Salvage', 'Tellurium',
+     'Nitain Extract', 'Synthula']
 
 def create_inline_entry(name, callback_value)
     Telegram::Bot::Types::InlineKeyboardButton.new(text: name, url: callback_value)
 end
 
 def resource_menu()
-    kb = Array.new
     i = 0
-    until i > RESOURCES.size do
-        kb.push([create_inline_entry(RESOURCES[i], 'https://google.com'), create_inline_entry(RESOURCES[i+1], 'https://google.com')])
+    kb = Array.new
+    until i > R.size() do
+        cell = [
+            create_inline_entry(R[i],'https://google.com'),
+            create_inline_entry(R[i+1], 'https://google.com')
+        ]
         i += 2
+        kb.push(cell)
     end
-    return kb
+    kb
 end
 
 def help()

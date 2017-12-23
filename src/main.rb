@@ -53,21 +53,20 @@ Telegram::Bot::Client.run(token) do |bot|
                  'Nitain Extract', 'Synthula']
 
             i = 0
-            kb1 = Array.new
-            until i == RESOURCES.size() do
+            kb = Array.new
+            until i == R.size() do
                 cell = [
                     create_inline_entry(R[i],'https://google.com'),
                     create_inline_entry(R[i+1], 'https://google.com')
                 ]
                 i += 2
-                kb1.push(cell)
+                kb.push(cell)
             end
 
-
-            puts "kb1\n" + kb1.to_s + "\n\n\n"
-
-            markup = Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb1)
+            kb1 = resourse_menu
+            markup = Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb)
             bot.api.send_message(chat_id: msg.chat.id, text: "Filters", reply_markup: markup)
+
         end
     end
 end
