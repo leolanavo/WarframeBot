@@ -3,10 +3,9 @@ source "https://rubygems.org" do
     ruby '2.4.2'
     gem 'telegram-bot-ruby'
     gem 'twitter'
-    gem 'json'
-    gem 'php-serialize'
     gem 'require'
     gem 'sqlite3'
+    gem 'rufus-scheduler'
 end
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }

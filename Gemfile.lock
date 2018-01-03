@@ -15,6 +15,8 @@ GEM
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
     equalizer (0.0.11)
+    et-orbi (1.0.8)
+      tzinfo
     faraday (0.13.1)
       multipart-post (>= 1.2, < 3)
     http (3.0.0)
@@ -28,14 +30,14 @@ GEM
     http_parser.rb (0.6.0)
     ice_nine (0.11.2)
     inflecto (0.0.2)
-    json (2.1.0)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     multipart-post (2.0.0)
     naught (1.1.0)
-    php-serialize (1.2.0)
     public_suffix (3.0.1)
     require (0.2.7)
+    rufus-scheduler (3.4.2)
+      et-orbi (~> 1.0)
     simple_oauth (0.3.1)
     sqlite3 (1.3.13)
     telegram-bot-ruby (0.8.5)
@@ -54,6 +56,8 @@ GEM
       multipart-post (~> 2.0)
       naught (~> 1.0)
       simple_oauth (~> 0.3.0)
+    tzinfo (1.2.4)
+      thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.4)
@@ -67,9 +71,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  json!
-  php-serialize!
   require!
+  rufus-scheduler!
   sqlite3!
   telegram-bot-ruby!
   twitter!
