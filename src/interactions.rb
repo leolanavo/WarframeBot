@@ -1,20 +1,22 @@
-RESOURCES = [['Alloy Plate', 'Argon Crystal'], ['Circuits', 'Control Module'],
-             ['Cryotic', 'Ferrite'], ['Gallium', 'Morphics'],
-             ['Nano Spores', 'Neural Sensors'], ['Neurodes', 'Orokin Cell'],
-             ['Oxium', 'Plastids'], ['Polymer Bundle', 'Rubedo'],
-             ['Salvage', 'Tellurium'], ['Nitain Extract', 'Synthula']]
-
 def create_inline_entry(name, callback_value)
-    Telegram::Bot::Types::InlineKeyboardButton.new(text: name, url: callback_value)
+    Telegram::Bot::Types::InlineKeyboardButton.new(text: name, callback_data: callback_value)
 end
 
-def resource_menu()
-    RESOURCES.map do |item|
-        [
-            create_inline_entry(item[0],'https://google.com'),
-            create_inline_entry(item[1], 'https://google.com')
-        ]
+def create_menu(array, cmd)
+    puts array.last.length
+    menu = array.map do |entry|
+        unless array.last.length.odd? and entry == array.last then
+            [
+                create_inline_entry(entry[0], cmd + '_' + entry[0]),
+                create_inline_entry(entry[1], cmd + '_' + entry[1])
+            ]
+        else
+            [
+                create_inline_entry(entry[0], cmd + '_' + entry[0])
+            ]
+        end
     end
+    Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: menu)
 end
 
 def help()
