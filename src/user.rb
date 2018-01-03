@@ -9,6 +9,10 @@ class User
         "Filters: " + @filters[0] + " " + @filters[1] + "\n"
     end
 
+    def get_id()
+        @id
+    end
+
     def change_id(id)
         @id = id
     end
