@@ -1,19 +1,30 @@
+MENU = [['Auras', 'Credits'], ['Endo', 'Helmets'],
+        ['Items', 'Nightmares'], ['Resources', 'Skins'],
+        ['Vauban', 'Weapons']]
+
 RESOURCES = [['Alloy Plate', 'Argon Crystal'], ['Circuits', 'Control Module'],
              ['Cryotic', 'Ferrite'], ['Gallium', 'Morphics'],
              ['Nano Spores', 'Neural Sensors'], ['Neurodes', 'Orokin Cell'],
              ['Oxium', 'Plastids'], ['Polymer Bundle', 'Rubedo'],
              ['Salvage', 'Tellurium'], ['Nitain Extract']]
 
-ENDO = ['80', '100', '150']
-
 ITEMS = [['Kubrow Egg', 'Kavat Genetic Code'], ['Void Traces', 'Synthula'],
          ['Orokin Catalyst', 'Orokin Reactor'], ['Void Traces', 'Forma']]
 
 VAUBAN = ['Chasis', 'Neuroptics', 'Systems']
 
+ENDO = ['80', '100', '150']
+
 WEAPONS = [['Ceramic Dagger', 'Dark Dagger'], ['Dark Sword', 'Glaive'],
            ['Heat Dagger', 'Heat Sword'], ['Jaw Sword', 'Pagolin Sword'],
            ['Plasma Sword']]
+
+HELMETS = [['Ash', 'Atlas'], ['Banshee', 'Chroma'], ['Ember', 'Equinox'],
+           ['Excalibur', 'Frost'], ['Gara', 'Harrow'], ['Hydroid', 'Inaros'],
+           ['Ivara', 'Limbo'], ['Loki', 'Mag'], ['Mesa', 'Mirage'],
+           ['Nekros', 'Nezha'], ['Nidus', 'Nova'], ['Nyx', 'Oberon'],
+           ['Octavia', 'Rhino'], ['Saryn', 'Titania'], ['Trinity', 'Valkyr'],
+           ['Vauban', 'Volt'], ['Wukong', 'Zephyr']]
 
 AURAS = [['Brief Respite', 'Corrosive Projection'], ['Dead Eye', 'EMP Aura'],
          ['Empowered Blades', 'Enemy Radar'], ['Energy Siphon', 'Growing Power'],
@@ -31,14 +42,16 @@ NIGHTMARES = [['Accelerated Blast', 'Animal Instict'], ['Armored Agility', 'Blaz
 
 SKINS = [['Brook', 'Dagger Axe'], ['Manticore']]
 
-HELMETS = [['Ash', 'Atlas'], ['Banshee', 'Chroma'], ['Ember', 'Equinox'],
-           ['Excalibur', 'Frost'], ['Gara', 'Harrow'], ['Hydroid', 'Inaros'],
-           ['Ivara', 'Limbo'], ['Loki', 'Mag'], ['Mesa', 'Mirage'],
-           ['Nekros', 'Nezha'], ['Nidus', 'Nova'], ['Nyx', 'Oberon'],
-           ['Octavia', 'Rhino'], ['Saryn', 'Titania'], ['Trinity', 'Valkyr'],
-           ['Vauban', 'Volt'], ['Wukong', 'Zephyr']]
+SUPER = [['main', MENU], ['resources', RESOURCES], ['items', ITEMS],
+         ['vauban', VAUBAN], ['endo', ENDO], ['weapons', WEAPONS],
+         ['helmets', HELMETS], ['auras', AURAS], ['nightmares', NIGHTMARES],
+         ['skins', SKINS]]
 
+def get_array(name)
+    SUPER.each do |entry|
+        if entry[0] == name then
+            return entry[1]
+        end
+    end
+end
 
-MENU = [['Auras', 'Credits'], ['Endo', 'Helmets'],
-        ['Items', 'Nightmares'], ['Resources', 'Skins'],
-        ['Vauban', 'Weapons']]

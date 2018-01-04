@@ -33,6 +33,13 @@ Telegram::Bot::Client.run(token) do |bot|
                 item = msg.data.split("_")[1]
                 user.remove_filter(item)
                 bot.api.send_message(chat_id: msg.from.id, text: "#{item} remove to the list")
+            when 'dupe'
+                msg_id = msg.message.message_id
+                chat_id = msg.message.chat.id
+                options = msg.data.split("_")
+                menu = create_menu(options[1], options[2], options[3].to_i)
+                bot.api.edit_message_text(chat_id: chat_id, message_id: msg_id,
+                                          text: "Filters", reply_markup: menu)
             end
 
         when Telegram::Bot::Types::Message
@@ -50,12 +57,11 @@ Telegram::Bot::Client.run(token) do |bot|
                 bot.api.send_message(chat_id: user.get_id, text: wrapper.get_alerts)
 
             when '/add'
-                menu = create_menu(RESOURCES, 'add')
+                menu = create_menu('add', 'resources', 0)
                 bot.api.send_message(chat_id: msg.chat.id, text: "Filters", reply_markup: menu)
 
             when '/remove'
-                menu = resource_menu(RESOURCES, 'remove')
-                bot.api.send_message(chat_id: msg.chat.id, text: "Filters", reply_markup: menu)
+                bot.api.send_message(chat_id: msg.chat.id, text: "Filters")
 
             when '/get'
                 bot.api.send_message(chat_id: msg.chat.id, text: user.get_filters)
