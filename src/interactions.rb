@@ -41,13 +41,15 @@ def create_menu(cmd, type, start)
 end
 
 def help()
-    "/start \t Start the bot\n" +
-    "/stop \t Stop the bot\n" +
-    "/alerts \t Get the active alerts\n" +
-    "/invasions \t Get the active invasions\n" +
-    "/sortie \t Get the active sortie\n" +
-    "/add \t Add a new filter\n" +
-    "/remove \t Remove a filter\n" +
-    "/get \t Get the active filters\n" +
-    "/help \t Print this menu"
+    "/start -> Start the bot\n" +
+    "/stop -> Stop the bot\n" +
+    "/alerts -> Get the active alerts\n" +
+    "/invasions -> Get the active invasions\n" +
+    "/sortie -> Get the active sortie\n" +
+    "/add -> Add a new filter\n" +
+    "/remove -> Remove a filter\n" +
+    "/filters -> Get the active filters\n" +
+    "/notify -> Enable/Disable notification for filtered alerts\n" +
+    "/notify_time -> Set the minimum notification iterval (minutes)\n" +
+    "/help -> Print this menu"
 end
