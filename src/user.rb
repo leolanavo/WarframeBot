@@ -1,20 +1,19 @@
 class User
-    def initialize()
-        @id = -1
+    def initialize(id, name, time)
+        @id = id
+        @name = name
+        @time = time
         @filters = Array.new
     end
 
     def to_s()
-        "ID: " + @id.to_s + "\n" +
-        "Filters: " + @filters[0] + " " + @filters[1] + "\n"
+        "Name: #{@name}\n" +
+        "ID: #{@id.to_s}\n" +
+        "Time: #{@time}\n"
     end
 
     def get_id()
         @id
-    end
-
-    def change_id(id)
-        @id = id
     end
 
     def get_filters()

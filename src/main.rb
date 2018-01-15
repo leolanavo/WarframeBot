@@ -9,13 +9,13 @@ require_relative 'arrays.rb'
 token = '501516696:AAEh8OJQ1xhTJ22dcWVK5zPjklvh1wXtt5U'
 
 wrapper = TWrapper.new()
-user = User.new
+user = nil
 scheduler = Rufus::Scheduler.new
 notify = false
 
 Telegram::Bot::Client.run(token) do |bot|
     scheduler.every '10m' do
-        unless user.get_id() == -1 and notify then
+        unless user != nil and notify then
             bot.api.send_message(chat_id: user.get_id, text: wrapper.get_alerts)
         end
     end
@@ -46,8 +46,9 @@ Telegram::Bot::Client.run(token) do |bot|
             case msg.text.split(" ")[0]
 
             when '/start'
-                user.change_id(msg.from.id)
-                bot.api.send_message(chat_id: msg.chat.id, text: "Hello, #{msg.from.first_name}")
+                user = User.new(msg.from.id, msg.from.first_name, '10m')
+                bot.api.send_message(chat_id: msg.chat.id, text: "Hello, #{msg.from.first_name} " +
+                                                                 "your user has been created")
 
             when '/stop'
                 bot.api.send_message(chat_id: msg.chat.id, text: "Bye, #{msg.from.first_name}")
