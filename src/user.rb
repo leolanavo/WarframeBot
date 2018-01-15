@@ -4,6 +4,7 @@ class User
         @name = name
         @time = time
         @filters = Array.new
+        @credits = Float::INFINITY
     end
 
     def to_s()
@@ -14,6 +15,14 @@ class User
 
     def get_id()
         @id
+    end
+
+    def set_time(time)
+        @time = time + "m"
+    end
+
+    def set_credits(amount)
+        @credits = amount
     end
 
     def get_filters()

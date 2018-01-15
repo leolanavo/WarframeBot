@@ -22,19 +22,24 @@ def create_menu(cmd, type, start)
         end
     end
 
-    if start + 4 < array.length and start - 4 >= 0 then
+    if start + EPD + 1 < array.length and start - EPD >= 0 then
         menu.push(
             [
-                create_inline_entry('Next', "dupe_#{cmd}_#{type}_#{start + 4}"),
-                create_inline_entry('Back', "dupe_#{cmd}_#{type}_#{start - 4}")
+                create_inline_entry('Next', "dupe_#{cmd}_#{type}_#{start + EPD}"),
+                create_inline_entry('Back', "dupe_#{cmd}_#{type}_#{start - EPD}")
             ]
         )
 
-    elsif start + 4 < array.length then
-        menu.push([create_inline_entry('Next', "dupe_#{cmd}_#{type}_#{start + 4}")])
+    elsif start + EPD + 1 < array.length then
+        menu.push([create_inline_entry('Next', "dupe_#{cmd}_#{type}_#{start + EPD}")])
 
-    elsif start - 4 >= 0 then
-        menu.push([create_inline_entry('Back', "dupe_#{cmd}_#{type}_#{start - 4}")])
+    elsif start - EPD >= 0 then
+        menu.push([create_inline_entry('Back', "dupe_#{cmd}_#{type}_#{start - EPD}")])
+
+    end
+
+    if !cmd.start_with?("main") then
+        menu.push([create_inline_entry('Main Menu', "dupe_main_#{cmd}_main_0")])
     end
 
     Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: menu)
@@ -47,9 +52,11 @@ def help()
     "/invasions -> Get the active invasions\n" +
     "/sortie -> Get the active sortie\n" +
     "/add -> Add a new filter\n" +
+    "/credits -> Add a filter for credits USAGE: /credits <number>\n" +
     "/remove -> Remove a filter\n" +
     "/filters -> Get the active filters\n" +
     "/notify -> Enable/Disable notification for filtered alerts\n" +
-    "/notify_time -> Set the minimum notification iterval (minutes)\n" +
+    "/notify_time -> Set the minimum notification iterval (minutes)," +
+                    "USAGE: /notify_time <number>\n" +
     "/help -> Print this menu"
 end

@@ -1,6 +1,6 @@
-MENU = [['Auras', 'Credits'], ['Endo', 'Helmets'],
-        ['Items', 'Nightmares'], ['Resources', 'Skins'],
-        ['Vauban', 'Weapons']]
+MENU = [['Auras', 'Endo'], ['Helmets', 'Items'],
+        ['Nightmares', 'Resources'], ['Skins', 'Vauban'],
+        ['Weapons']]
 
 RESOURCES = [['Alloy Plate', 'Argon Crystal'], ['Circuits', 'Control Module'],
              ['Cryotic', 'Ferrite'], ['Gallium', 'Morphics'],
@@ -11,9 +11,9 @@ RESOURCES = [['Alloy Plate', 'Argon Crystal'], ['Circuits', 'Control Module'],
 ITEMS = [['Kubrow Egg', 'Kavat Genetic Code'], ['Void Traces', 'Synthula'],
          ['Orokin Catalyst', 'Orokin Reactor'], ['Void Traces', 'Forma']]
 
-VAUBAN = ['Chasis', 'Neuroptics', 'Systems']
+VAUBAN = [['Chasis', 'Neuroptics'], ['Systems']]
 
-ENDO = ['80', '100', '150']
+ENDO = [['80', '100'], ['150']]
 
 WEAPONS = [['Ceramic Dagger', 'Dark Dagger'], ['Dark Sword', 'Glaive'],
            ['Heat Dagger', 'Heat Sword'], ['Jaw Sword', 'Pagolin Sword'],
@@ -42,10 +42,10 @@ NIGHTMARES = [['Accelerated Blast', 'Animal Instict'], ['Armored Agility', 'Blaz
 
 SKINS = [['Brook', 'Dagger Axe'], ['Manticore']]
 
-SUPER = [['main', MENU], ['resources', RESOURCES], ['items', ITEMS],
-         ['vauban', VAUBAN], ['endo', ENDO], ['weapons', WEAPONS],
-         ['helmets', HELMETS], ['auras', AURAS], ['nightmares', NIGHTMARES],
-         ['skins', SKINS]]
+SUPER = [['main', MENU], ['Resources', RESOURCES], ['Items', ITEMS],
+         ['Vauban', VAUBAN], ['Endo', ENDO], ['Weapons', WEAPONS],
+         ['Helmets', HELMETS], ['Auras', AURAS], ['Nightmares', NIGHTMARES],
+         ['Skins', SKINS]]
 
 def get_array(name)
     SUPER.each do |entry|
