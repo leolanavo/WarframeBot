@@ -15,10 +15,15 @@ class Alert
     end
 
     def to_s()
-        "Mission: "   + @mission.to_s + "\n" +
+        str = "Mission: "   + @mission.to_s + "\n" +
         "Planet: "    + @planet.to_s  + "\n" +
-        "Credits: "   + @credits.to_s + "\n" +
-        "Reward: "    + @reward.to_s  + "\n" +
-        "Time Left: " + @r_time.to_s  + "\n\n"
+        "Credits: "   + @credits.to_s + "\n"
+
+        if @reward.empty?
+            str += "Reward: "    + @reward.to_s  + "\n"
+        end
+
+        str += "Time Left: " + @r_time.to_s  + "\n\n"
+        str
     end
 end
