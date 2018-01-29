@@ -21,6 +21,12 @@ class User
         @time = time + "m"
     end
 
+    # The capture group cuts the uncessary parenthesis content used for the
+    # reward
+    def filter(reward)
+        @filters.include?(reward.match(/(.*) \(.*\)/i).captures)
+    end
+
     def set_credits(amount)
         @credits = amount
     end
