@@ -34,14 +34,17 @@ Telegram::Bot::Client.run(token) do |bot|
 
                 bot.api.edit_message_text(chat_id: chat_id, message_id: msg_id,
                                           text: "Filters", reply_markup: menu)
+
             when 'add'
                 item = msg.data.split("_")[1]
                 user.add_filter(item)
                 bot.api.send_message(chat_id: msg.from.id, text: "#{item} added to the list")
+
             when 'remove'
                 item = msg.data.split("_")[1]
                 user.remove_filter(item)
                 bot.api.send_message(chat_id: msg.from.id, text: "#{item} remove to the list")
+
             when 'dupe'
                 msg_id = msg.message.message_id
                 chat_id = msg.message.chat.id
@@ -75,7 +78,9 @@ Telegram::Bot::Client.run(token) do |bot|
 
             when '/notify'
                 notify = !notify
-                bot.api.send_message(chat_id: user.get_id, text: wrapper.get_alerts)
+                if notify
+                    bot.api.send_message(chat_id: user.get_id, text: wrapper.get_alerts)
+                end
 
             when '/notify_time'
                 time = msg.text.strip.squeeze(" ").split(" ")[1]
