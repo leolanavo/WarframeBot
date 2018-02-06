@@ -1,10 +1,21 @@
+N_BITS = ([42].pack('i').size * 8)
+MAX = 2 ** (N_BITS - 2) - 1
+
 class User
     def initialize(id, name, time)
         @id = id
         @name = name
         @time = time
         @filters = Array.new
-        @credits = Float::INFINITY
+        @credits = MAX
+
+        db = SQLite3::Database.new "database/database.db"
+        db.execute "CREATE TABLE IF NOT EXISTS Users
+                    (Id INTEGER PRIMARY KEY, Name TEXT,
+                    Time TEXT, Credits INTEGER,
+                    UNIQUE (Id))"
+
+        db.execute "INSERT OR IGNORE INTO Users VALUES (#{@id}, '#{@name}', '#{@time}', #{@credits})"
     end
 
     def to_s()

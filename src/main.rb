@@ -1,5 +1,6 @@
 require 'telegram/bot'
 require 'rufus-scheduler'
+require 'sqlite3'
 
 require_relative 'twitter_wrapper.rb'
 require_relative 'interactions.rb'
@@ -9,7 +10,6 @@ require_relative 'arrays.rb'
 token = '501516696:AAEh8OJQ1xhTJ22dcWVK5zPjklvh1wXtt5U'
 
 wrapper = TWrapper.new()
-user = User.new(-1, "Léo", "10m")
 scheduler = Rufus::Scheduler.new
 notify = false
 
@@ -79,7 +79,7 @@ Telegram::Bot::Client.run(token) do |bot|
             when '/notify'
                 notify = !notify
                 if notify
-                    bot.api.send_message(chat_id: user.get_id, text: wrapper.get_alerts)
+                    bot.api.send_message(chat_id: msg.chat.id, text: wrapper.get_alerts)
                 end
 
             when '/notify_time'

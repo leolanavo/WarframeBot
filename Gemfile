@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 source "https://rubygems.org" do
-    ruby '2.4.2'
     gem 'telegram-bot-ruby'
     gem 'twitter'
     gem 'require'
